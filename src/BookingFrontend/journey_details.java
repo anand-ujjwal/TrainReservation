@@ -216,21 +216,24 @@ public class journey_details extends javax.swing.JFrame {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/reservation?user=root&password=1234");
                         PreparedStatement ps=con.prepareStatement("insert into journey(pnr,train_number,train_name,doj,no_of_seat,from_station,to_station,booking_from,resv_upto) values (  ? , ? , ?  , ? , ? , ? , ? , ? , ? )");
-			int pnrd=Integer.parseInt(pnr.getText());
-                        ps.setInt(1, pnrd);
-                        int trainNO=Integer.parseInt(train_numb.getText());
-			ps.setInt(2, trainNO);
+		//	int pnrd=Integer.parseInt(pnr.getText());
+                        ps.setString(1,pnr.getText());
+                       // ps.setInt(1, pnrd);
+                       // int trainNO=Integer.parseInt(train_numb.getText());
+			//ps.setInt(2, trainNO);
+                        ps.setString(2,train_numb.getText());
 			ps.setString(3, train_name.getText());
 			ps.setString(4, doj.getText());
-                        int Seat=Integer.parseInt(seats.getText());
-			ps.setInt(5,Seat );
+                   //     int Seat=Integer.parseInt(seats.getText());
+			ps.setString(5,seats.getText() );
 			ps.setString(6, station_from.getText());
 			ps.setString(7, station_to.getText());
 			ps.setString(8, boarding_from.getText());
 			ps.setString(9, boarding_to.getText());
 			int rs = ps.executeUpdate();
 			System.out.println("Row number inserted==" +rs);
-			//insertPassenger(Integer.parseInt(seats.getText()),Integer.parseInt(pnr.getText()));
+                        passengers_delatils pd=new passengers_delatils();
+		//	pd.insertPassenger(Seat,pnrd);
 
 		}
 
@@ -239,8 +242,8 @@ public class journey_details extends javax.swing.JFrame {
 			e.printStackTrace();
 		}
         
-     //   passengers_delatils pd=new passengers_delatils();
-     //   pd.setVisible(true);
+       passengers_delatils pd=new passengers_delatils();
+        pd.setVisible(true);
     }//GEN-LAST:event_btn_addpActionPerformed
 
     /**

@@ -352,7 +352,10 @@ public class passengers_delatils extends javax.swing.JFrame {
         options_panel op=new options_panel();
         op.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    public static void insertPassenger(int seats,int pnr)
+    {
+        System.out.println(seats +"pnr:"+pnr);
+    }
     /**
      * @param args the command line arguments
      */
