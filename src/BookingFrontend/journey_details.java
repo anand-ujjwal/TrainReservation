@@ -16,14 +16,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
-
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ujjwal
  */
-public class journey_details extends javax.swing.JFrame {
-
+public class journey_details extends javax.swing.JFrame{
+static journey_details jd=new journey_details();
     /**
      * Creates new form journey_details
      */
@@ -62,6 +62,7 @@ public class journey_details extends javax.swing.JFrame {
         boarding_to = new javax.swing.JTextField();
         field_class = new javax.swing.JTextField();
         btn_addp = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,12 +116,19 @@ public class journey_details extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -158,9 +166,11 @@ public class journey_details extends javax.swing.JFrame {
                     .addComponent(field_class))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(481, 481, 481)
+                .addGap(384, 384, 384)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(btn_addp)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -201,8 +211,10 @@ public class journey_details extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel11)
                     .addComponent(field_class, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(btn_addp)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_addp)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -214,11 +226,11 @@ public class journey_details extends javax.swing.JFrame {
            try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/reservation?user=root&password=1234");
+                    	Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/reservation?user=root&password=1234");
                         PreparedStatement ps=con.prepareStatement("insert into journey(pnr,train_number,train_name,doj,no_of_seat,from_station,to_station,booking_from,resv_upto) values (  ? , ? , ?  , ? , ? , ? , ? , ? , ? )");
 		//	int pnrd=Integer.parseInt(pnr.getText());
                         ps.setString(1,pnr.getText());
-                       // ps.setInt(1, pnrd);
+                        // ps.setInt(1, pnrd);
                        // int trainNO=Integer.parseInt(train_numb.getText());
 			//ps.setInt(2, trainNO);
                         ps.setString(2,train_numb.getText());
@@ -232,19 +244,38 @@ public class journey_details extends javax.swing.JFrame {
 			ps.setString(9, boarding_to.getText());
 			int rs = ps.executeUpdate();
 			System.out.println("Row number inserted==" +rs);
-                        passengers_delatils pd=new passengers_delatils();
-		//	pd.insertPassenger(Seat,pnrd);
+                    //    passengers_delatils.pass_seats =Integer.parseInt(seats.getText());
+                    //    passengers_delatils.pass_pnr=Integer.parseInt(pnr.getText());
+                   //     System.out.printf("%d= seats,%d = pnr", passengers_delatils.pass_seats,passengers_delatils.pass_pnr);
+                       // passengers_delatils pd=new passengers_delatils();
+                        //int Seat=Integer.parseInt(seats.getText());
+                        //int pnrd=Integer.parseInt(pnr.getText());
+			//pd.insertPassenger(Seat,pnrd);
+                        if(rs==0)
+                        {
+                            JOptionPane.showMessageDialog(null, "Can't create journey!! Please recheck the details!"); 
+                        }
+                        else
+                        {
+                             passengers_delatils pd=new passengers_delatils();
+                             pd.setVisible(true);
+                             jd.setVisible(false);
+                        }
 
 		}
 
 		catch(Exception e)
 		{
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
         
-       passengers_delatils pd=new passengers_delatils();
-        pd.setVisible(true);
+      
     }//GEN-LAST:event_btn_addpActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new options_panel().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,11 +303,11 @@ public class journey_details extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(journey_details.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new journey_details().setVisible(true);
+                jd.setVisible(true);
             }
         });
     }
@@ -287,6 +318,7 @@ public class journey_details extends javax.swing.JFrame {
     private javax.swing.JButton btn_addp;
     private javax.swing.JTextField doj;
     private javax.swing.JTextField field_class;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

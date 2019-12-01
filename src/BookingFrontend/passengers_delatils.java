@@ -5,12 +5,18 @@
  */
 package BookingFrontend;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.util.Scanner;
+
 /**
  *
  * @author ujjwal
  */
 public class passengers_delatils extends javax.swing.JFrame {
-
+    static passengers_delatils pd=new passengers_delatils();
+   static  int pass_pnr,pass_seats;
     /**
      * Creates new form passengers_delatils
      */
@@ -79,6 +85,10 @@ public class passengers_delatils extends javax.swing.JFrame {
         food5 = new javax.swing.JTextField();
         food6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        pnr = new javax.swing.JTextField();
+        seats = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -188,96 +198,121 @@ public class passengers_delatils extends javax.swing.JFrame {
             }
         });
 
+        seats.setText(" ");
+
+        jLabel15.setText("PNR");
+
+        jLabel16.setText("SEATS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel2))
-                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel4)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel5)
-                        .addGap(50, 50, 50))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(name6)
-                            .addComponent(name5)
-                            .addComponent(name4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(name3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(name2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(age5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(age4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(age3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(age2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(age1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(age6))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(sex5, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
-                            .addComponent(sex4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sex3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sex1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sex2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(sex6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(concession5, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(concession4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(concession3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(concession2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(concession1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(concession6))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(seat5, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seat4, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seat3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seat2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(seat1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(seat6))
-                .addGap(18, 18, 18)
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel2))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel15)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(food1)
-                        .addComponent(food2, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(food3)
-                        .addComponent(food4)
-                        .addComponent(food5)
-                        .addComponent(food6)))
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pnr, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(70, 70, 70)
+                                .addComponent(jLabel4)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel5)
+                                .addGap(50, 50, 50))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(name6)
+                                    .addComponent(name5)
+                                    .addComponent(name4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(name3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(name2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(name1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(age5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                                    .addComponent(age4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(age3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(age2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(age1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(age6))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(sex5, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)
+                                    .addComponent(sex4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sex3, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sex1, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sex2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(sex6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(concession5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(concession4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(concession3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(concession2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(concession1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(concession6))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(seat5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seat4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seat3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seat2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(seat1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seat6))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(food1)
+                                .addComponent(food2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(food3)
+                                .addComponent(food4)
+                                .addComponent(food5)
+                                .addComponent(food6)))
+                        .addContainerGap(58, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(61, 61, 61)
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel16))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
@@ -340,7 +375,7 @@ public class passengers_delatils extends javax.swing.JFrame {
                     .addComponent(concession6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(seat6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(food6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(23, 23, 23))
         );
@@ -350,13 +385,93 @@ public class passengers_delatils extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        options_panel op=new options_panel();
-        op.setVisible(true);
+      try
+		{
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/reservation?user=root&password=1234");
+			PreparedStatement ps=con.prepareStatement("insert into passenger(serial_numb,name,sex,age,concession,seat_pref,food_pref,pnr) values (  ? , ? , ?  , ? , ? , ? , ? , ?  )");
+			ps.setInt(1, 1);
+			ps.setString(2, name1.getText());
+			ps.setString(3, sex1.getText());
+			ps.setString(4, age1.getText());
+			ps.setString(5, concession1.getText());
+			ps.setString(6, seat1.getText());
+			ps.setString(7, food1.getText());
+			ps.setString(8, pnr.getText());
+			int rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+                        ps.setInt(1, 2);
+			ps.setString(2, name2.getText());
+			ps.setString(3, sex2.getText());
+			ps.setString(4, age2.getText());
+			ps.setString(5, concession2.getText());
+			ps.setString(6, seat2.getText());
+			ps.setString(7, food2.getText());
+			ps.setString(8, pnr.getText());
+			rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+                        ps.setInt(1, 3);
+			ps.setString(2, name3.getText());
+			ps.setString(3, sex3.getText());
+			ps.setString(4, age3.getText());
+			ps.setString(5, concession3.getText());
+			ps.setString(6, seat3.getText());
+			ps.setString(7, food3.getText());
+			ps.setString(8, pnr.getText());
+			rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+                        ps.setInt(1, 1);
+			ps.setString(2, name4.getText());
+			ps.setString(3, sex4.getText());
+			ps.setString(4, age4.getText());
+			ps.setString(5, concession4.getText());
+			ps.setString(6, seat4.getText());
+			ps.setString(7, food4.getText());
+			ps.setString(8, pnr.getText());
+			 rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+                        ps.setInt(1, 1);
+			ps.setString(2, name5.getText());
+			ps.setString(3, sex5.getText());
+			ps.setString(4, age5.getText());
+			ps.setString(5, concession5.getText());
+			ps.setString(6, seat5.getText());
+			ps.setString(7, food5.getText());
+			ps.setString(8, pnr.getText());
+			 rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+                        ps.setInt(1, 1);
+			ps.setString(2, name6.getText());
+			ps.setString(3, sex6.getText());
+			ps.setString(4, age6.getText());
+			ps.setString(5, concession6.getText());
+			ps.setString(6, seat6.getText());
+			ps.setString(7, food6.getText());
+			ps.setString(8, pnr.getText());
+			rs = ps.executeUpdate();
+			System.out.println("Row number inserted in passenger table==" +rs);
+		}
+
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+      new options_panel().setVisible(true);
+      pd.setVisible(false);
+	}
+	
+	
+	
+	/*public static void insertJourney()
+	{
+	
     }//GEN-LAST:event_jButton1ActionPerformed
-    public static void insertPassenger(int seats,int pnr)
+    public void insertPassenger(int seats,int pnr)
     {
+        pass_pnr=pnr;
+        pass_seats=seats;
         System.out.println(seats +"pnr:"+pnr);
-    }
+    }*/
     /**
      * @param args the command line arguments
      */
@@ -387,7 +502,7 @@ public class passengers_delatils extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new passengers_delatils().setVisible(true);
+                pd.setVisible(true);
             }
         });
     }
@@ -418,6 +533,8 @@ public class passengers_delatils extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -432,12 +549,14 @@ public class passengers_delatils extends javax.swing.JFrame {
     private javax.swing.JTextField name4;
     private javax.swing.JTextField name5;
     private javax.swing.JTextField name6;
+    private javax.swing.JTextField pnr;
     private javax.swing.JTextField seat1;
     private javax.swing.JTextField seat2;
     private javax.swing.JTextField seat3;
     private javax.swing.JTextField seat4;
     private javax.swing.JTextField seat5;
     private javax.swing.JTextField seat6;
+    private javax.swing.JTextField seats;
     private javax.swing.JTextField sex1;
     private javax.swing.JTextField sex2;
     private javax.swing.JTextField sex3;
