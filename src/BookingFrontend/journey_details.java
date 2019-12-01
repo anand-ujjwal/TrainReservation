@@ -55,12 +55,10 @@ static journey_details jd=new journey_details();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         station_from = new javax.swing.JTextField();
         station_to = new javax.swing.JTextField();
         boarding_from = new javax.swing.JTextField();
         boarding_to = new javax.swing.JTextField();
-        field_class = new javax.swing.JTextField();
         btn_addp = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
@@ -97,8 +95,6 @@ static journey_details jd=new journey_details();
 
         jLabel10.setText("TO:");
 
-        jLabel11.setText("CLASS:");
-
         station_from.setText(" ");
 
         station_to.setText(" ");
@@ -106,8 +102,6 @@ static journey_details jd=new journey_details();
         boarding_from.setText(" ");
 
         boarding_to.setText(" ");
-
-        field_class.setText(" ");
 
         btn_addp.setText("ADD PASSENGERS");
         btn_addp.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +122,7 @@ static journey_details jd=new journey_details();
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(71, Short.MAX_VALUE)
+                .addContainerGap(72, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
@@ -150,27 +144,25 @@ static journey_details jd=new journey_details();
                             .addComponent(doj, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(train_name, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(86, 86, 86)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel9)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(station_from, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
-                    .addComponent(station_to)
-                    .addComponent(boarding_from)
-                    .addComponent(boarding_to)
-                    .addComponent(field_class))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(384, 384, 384)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(btn_addp)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(station_from, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(station_to)
+                            .addComponent(boarding_from)
+                            .addComponent(boarding_to)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_addp)))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -209,13 +201,9 @@ static journey_details jd=new journey_details();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel11)
-                    .addComponent(field_class, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_addp)
-                    .addComponent(jButton1))
-                .addContainerGap())
+                    .addComponent(jButton1)
+                    .addComponent(btn_addp))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -254,6 +242,13 @@ static journey_details jd=new journey_details();
                         if(rs==0)
                         {
                             JOptionPane.showMessageDialog(null, "Can't create journey!! Please recheck the details!"); 
+                        }
+                        else if(rs==1)
+                        {
+                         JOptionPane.showMessageDialog(null, "Enter the passenger details!!");   
+                             passengers_delatils pd=new passengers_delatils();
+                             pd.setVisible(true);
+                             jd.setVisible(false);
                         }
                         else
                         {
@@ -317,11 +312,9 @@ static journey_details jd=new journey_details();
     private javax.swing.JTextField boarding_to;
     private javax.swing.JButton btn_addp;
     private javax.swing.JTextField doj;
-    private javax.swing.JTextField field_class;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -86,9 +87,7 @@ public class passengers_delatils extends javax.swing.JFrame {
         food6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         pnr = new javax.swing.JTextField();
-        seats = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,11 +197,7 @@ public class passengers_delatils extends javax.swing.JFrame {
             }
         });
 
-        seats.setText(" ");
-
         jLabel15.setText("PNR");
-
-        jLabel16.setText("SEATS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,13 +222,9 @@ public class passengers_delatils extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(pnr, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                        .addComponent(pnr, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,9 +300,7 @@ public class passengers_delatils extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pnr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(seats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -387,10 +376,11 @@ public class passengers_delatils extends javax.swing.JFrame {
         // TODO add your handling code here:
       try
 		{
+                        
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/reservation?user=root&password=1234");
 			PreparedStatement ps=con.prepareStatement("insert into passenger(serial_numb,name,sex,age,concession,seat_pref,food_pref,pnr) values (  ? , ? , ?  , ? , ? , ? , ? , ?  )");
-			ps.setInt(1, 1);
+                        ps.setInt(1, 1);
 			ps.setString(2, name1.getText());
 			ps.setString(3, sex1.getText());
 			ps.setString(4, age1.getText());
@@ -534,7 +524,6 @@ public class passengers_delatils extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -556,7 +545,6 @@ public class passengers_delatils extends javax.swing.JFrame {
     private javax.swing.JTextField seat4;
     private javax.swing.JTextField seat5;
     private javax.swing.JTextField seat6;
-    private javax.swing.JTextField seats;
     private javax.swing.JTextField sex1;
     private javax.swing.JTextField sex2;
     private javax.swing.JTextField sex3;

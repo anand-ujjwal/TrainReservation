@@ -5,9 +5,11 @@
  */
 package BookingFrontend;
 
+import static BookingFrontend.cancel_particular.cp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -115,7 +117,21 @@ static cancel_complete cc=new cancel_complete();
 			System.out.println("No. of record deleted from passenger table=="+rs1);
 			int rs=ps.executeUpdate();
 			System.out.println("No. of record deleted from journey table=="+rs);
-			
+			 if(rs==0)
+                        {
+                           JOptionPane.showMessageDialog(null, "Can't Cancel!!Recheck the entered details!!"); 
+                        }
+                        else if(rs==1)
+                        {
+                            JOptionPane.showMessageDialog(null, "Cancelled the ticket successfully!!"); 
+                            new options_panel().setVisible(true);
+                            cp.setVisible(false);
+                        }
+                        else
+                        {
+                            new options_panel().setVisible(true);
+                            cp.setVisible(false);
+                        }
 		}
 		catch(Exception e)
 		{

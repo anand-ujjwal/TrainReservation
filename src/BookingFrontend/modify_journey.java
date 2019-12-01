@@ -5,9 +5,11 @@
  */
 package BookingFrontend;
 
+import static BookingFrontend.cancel_particular.cp;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -129,6 +131,21 @@ static modify_journey mj=new modify_journey();
 
 			int rs=ps.executeUpdate();
 			System.out.println("No.of row updated==" + rs);
+                        if(rs==0)
+                        {
+                           JOptionPane.showMessageDialog(null, "Can't modify the date of journey!!Recheck the entered details!!"); 
+                        }
+                        else if(rs==1)
+                        {
+                            JOptionPane.showMessageDialog(null, "Modified date of journey successfully!!"); 
+                            new options_panel().setVisible(true);
+                            cp.setVisible(false);
+                        }
+                       else
+                       {
+                           new options_panel().setVisible(true);
+                           cp.setVisible(false);
+                       }
 
 		}
 		catch(Exception e)

@@ -146,15 +146,25 @@ static cancel_particular cp=new cancel_particular();
 			System.out.println("No. of record deleted from journey table=="+rs);
                         if(rs==0)
                         {
-                           JOptionPane.showMessageDialog(null, "Only one passenger is there so can't cancel!!"); 
+                           JOptionPane.showMessageDialog(null, "Can't Cancel!Plese recheck the entered details and ensure that the number of passengers is greaater than 1!"); 
+                        }
+                        else if(rs==1)
+                        {
+                            JOptionPane.showMessageDialog(null, "Cancelled the passenger successfully!!"); 
+                            new options_panel().setVisible(true);
+                            cp.setVisible(false);
+                        }
+                        else
+                        {
+                            new options_panel().setVisible(true);
+                            cp.setVisible(false);
                         }
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-        new options_panel().setVisible(true);
-        cp.setVisible(false);
+        
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
